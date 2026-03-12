@@ -1,0 +1,15 @@
+{
+  "name": "tests",
+  "version": "1.0.0",
+  "scripts": {
+    "test:integration": "jest integration/",
+    "test:e2e": "jest e2e/",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^29.0.0",
+    "supertest": "^6.0.0",
+    "selenium-webdriver": "^4.0.0",
+    "chromedriver": "^120.0.0"
+  }
+}
