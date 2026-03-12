@@ -36,9 +36,9 @@ Le projet utilise le **GitHub Flow** avec les branches suivantes :
 
 | Branche | Responsable | Contenu |
 |---|---|---|
-| `feature/test-unit` | Personne 1 | Tests unitaires Jest |
-| `feature/test-selenium` | Jade | Tests intégration + E2E Selenium |
-| `feature/ci-cd` | Personne 3 | Pipeline CI/CD GitHub Actions |
+| `test-unit` | Sandor | Tests unitaires Jest |
+| `test-selenium` | Jade | Tests intégration + E2E Selenium |
+| `ci-cd` | Yanis | Pipeline CI/CD GitHub Actions |
 
 Chaque fonctionnalité a été développée dans une branche dédiée puis intégrée dans `main` via Pull Request.
 
@@ -47,7 +47,7 @@ Chaque fonctionnalité a été développée dans une branche dédiée puis inté
 ## Partie 1 — Tests Unitaires
 
 **Rôle : Tests unitaires Jest**  
-**Branche : `feature/test-unit`**
+**Branche : `test-unit`**
 
 ### Installation et lancement
 ```bash
@@ -72,8 +72,8 @@ backend/
 
 ### Résultats
 ```
-PASS backend/tests/unit/jest_test.js
-PASS backend/tests/unit/title_test.js
+PASS backend/tests/unit/integration.test.js
+PASS backend/tests/unit/jest.test.js
 
 Tests : tous passés ✅
 ```
@@ -83,7 +83,7 @@ Tests : tous passés ✅
 ## Partie 2 — Tests d'intégration & E2E Selenium
 
 **Rôle : Tests d'intégration API + Tests E2E**  
-**Branche : `feature/test-selenium`**
+**Branche : `test-selenium`**
 
 ### Installation
 ```bash
@@ -161,7 +161,7 @@ Tests : 4 passed, 4 total
 ## Partie 3 — CI/CD GitHub Actions
 
 **Rôle : Intégration Continue**  
-**Branche : `feature/ci-cd`**
+**Branche : `ci-cd`**
 
 ### Fichier de configuration
 ```
