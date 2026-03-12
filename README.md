@@ -1,11 +1,89 @@
-# taskmanagement
-Application de gestion de tâches
+# Gestionnaire de Tâches Web
+# GENOT Sandor | KHALDI Yanis | TAFILI Jade 
+#Classe 3IABD1
 
-**Jade TAFILI**
-**Rôle : Tests d'intégration & E2E Selenium**  
-**Branche : `test-selenium`**
+
+Application web collaborative de gestion de tâches développée dans le cadre d'un projet d'examen.
 
 ---
+
+## Lancer l'application
+
+**Terminal 1 — Backend**
+```bash
+cd backend
+npm install
+npm run dev
+```
+
+**Terminal 2 — Frontend**
+```bash
+cd frontend
+npm install
+npm start
+```
+
+**Accès :**
+- URL : `http://localhost:3000`
+- Email : `admin@test.com`
+- Mot de passe : `password`
+
+---
+
+## Workflow Git
+
+Le projet utilise le **GitHub Flow** avec les branches suivantes :
+
+| Branche | Responsable | Contenu |
+|---|---|---|
+| `feature/test-unit` | Personne 1 | Tests unitaires Jest |
+| `feature/test-selenium` | Jade | Tests intégration + E2E Selenium |
+| `feature/ci-cd` | Personne 3 | Pipeline CI/CD GitHub Actions |
+
+Chaque fonctionnalité a été développée dans une branche dédiée puis intégrée dans `main` via Pull Request.
+
+---
+
+## Partie 1 — Tests Unitaires
+
+**Rôle : Tests unitaires Jest**  
+**Branche : `feature/test-unit`**
+
+### Installation et lancement
+```bash
+cd backend
+npm test
+```
+
+### Fichiers de tests
+```
+backend/
+└── tests/
+    └── unit/
+        ├── jest_test.js
+        └── title_test.js
+```
+
+### Ce qui est testé
+
+- Bon fonctionnement des fonctions métier
+- Validité des données
+- Comportement attendu des différentes parties du code
+
+### Résultats
+```
+PASS backend/tests/unit/jest_test.js
+PASS backend/tests/unit/title_test.js
+
+Tests : tous passés ✅
+```
+
+---
+
+## Partie 2 — Tests d'intégration & E2E Selenium
+
+**Rôle : Tests d'intégration API + Tests E2E**  
+**Branche : `feature/test-selenium`**
 
 ### Installation
 ```bash
@@ -22,13 +100,9 @@ npm run test:integration
 npm run test:e2e
 ```
 
----
-
 ### Tests d'intégration API (`tests/integration/api.test.js`)
 
 Outil utilisé : **Supertest + Jest**
-
-Les tests vérifient les endpoints REST de l'API avec authentification JWT :
 
 | Endpoint | Test | Résultat |
 |---|---|---|
@@ -45,14 +119,10 @@ Les tests vérifient les endpoints REST de l'API avec authentification JWT :
 - **Status 401 sur toutes les routes** → Les routes sont protégées par JWT. Ajout d'un `beforeAll` pour se connecter et récupérer le token avant chaque test.
 - **Status 204 au lieu de 200 sur DELETE** → Le backend renvoie 204 (No Content) ce qui est correct. Correction de l'assertion dans le test.
 
----
-
 ### Tests E2E Selenium (`tests/e2e/selenium.test.js`)
 
 Outil utilisé : **Selenium WebDriver + Jest**  
 Navigateur : **Chrome (headless)**
-
-Les tests simulent un parcours utilisateur complet :
 
 | Test | Description | Résultat |
 |---|---|---|
@@ -63,10 +133,8 @@ Les tests simulent un parcours utilisateur complet :
 
 **Erreurs rencontrées :**
 
-- **SessionNotCreatedError: ChromeDriver version 146 / Chrome version 145** → Incompatibilité de version entre ChromeDriver installé et Chrome local. Résolu en installant la version correspondante : `npm install --save-dev chromedriver@145`.
-- **Timeout 5000ms dépassé** → Le timeout par défaut de Jest est insuffisant pour Selenium. Résolu en passant le timeout à 15000ms sur chaque test et en ajoutant un `beforeAll` avec timeout de 30000ms.
-
----
+- **SessionNotCreatedError: ChromeDriver version 146 / Chrome version 145** → Incompatibilité de version. Résolu avec `npm install --save-dev chromedriver@145`.
+- **Timeout 5000ms dépassé** → Timeout insuffisant pour Selenium. Résolu en passant à 15000ms par test et 30000ms pour le `beforeAll`.
 
 ### Résultats finaux
 ```
@@ -87,3 +155,47 @@ PASS e2e/selenium.test.js
 
 Tests : 4 passed, 4 total
 ```
+
+---
+
+## Partie 3 — CI/CD GitHub Actions
+
+**Rôle : Intégration Continue**  
+**Branche : `feature/ci-cd`**
+
+### Fichier de configuration
+```
+.github/
+└── workflows/
+    └── ci.yml
+```
+
+### Pipeline CI/CD
+
+La pipeline se déclenche automatiquement lors d'un **push** ou d'une **Pull Request**.
+
+**Étapes du pipeline :**
+
+1. Récupération du repository
+2. Installation de Node.js
+3. Installation des dépendances backend (`npm install`)
+4. Installation des dépendances frontend (`npm install`)
+5. Exécution des tests automatiquement
+
+### Résultats
+
+La pipeline est visible dans **GitHub → Actions** et permet de vérifier automatiquement que le projet fonctionne correctement à chaque modification du code.
+```
+✅ CI Pipeline #4 — Merge pull request — main — 19s
+```
+
+---
+
+## Récapitulatif
+
+| Partie | Outil | Tests | Statut |
+|---|---|---|---|
+| Tests unitaires | Jest | `npm test` dans `/backend` | ✅ |
+| Tests intégration | Supertest | `npm run test:integration` dans `/tests` | ✅ |
+| Tests E2E | Selenium | `npm run test:e2e` dans `/tests` | ✅ |
+| CI/CD | GitHub Actions | Automatique sur push/PR | ✅ |
