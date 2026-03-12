@@ -7,9 +7,9 @@
     "test": "jest"
   },
   "devDependencies": {
+    "chromedriver": "^145.0.6",
     "jest": "^29.0.0",
-    "supertest": "^6.0.0",
     "selenium-webdriver": "^4.0.0",
-    "chromedriver": "^120.0.0"
+    "supertest": "^6.0.0"
   }
 }
